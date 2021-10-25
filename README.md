@@ -1,4 +1,4 @@
-# node-typescript-boilerplate
+<!-- # node-typescript-boilerplate
 
 [![Sponsor][sponsor-badge]][sponsor]
 [![TypeScript version][ts-badge]][typescript-4-4]
@@ -101,4 +101,4 @@ Licensed under the APLv2. See the [LICENSE](https://github.com/jsynowiec/node-ty
 [volta-getting-started]: https://docs.volta.sh/guide/getting-started
 [volta-tomdale]: https://twitter.com/tomdale/status/1162017336699838467?s=20
 [gh-actions]: https://github.com/features/actions
-[repo-template-action]: https://github.com/jsynowiec/node-typescript-boilerplate/generate
+[repo-template-action]: https://github.com/jsynowiec/node-typescript-boilerplate/generate -->
