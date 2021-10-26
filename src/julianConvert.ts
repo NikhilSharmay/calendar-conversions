@@ -1,32 +1,43 @@
 import { DateType } from './constants';
 
-function dateToJDN(
-  greg: Date = new Date(),
+/**
+ * Convert date to julian day number(JDN)
+ * JDN is breifly number of days since 1,jan,4713 BC
+ * Calculation as described in http://www.cs.utsa.edu/~cs1063/projects/Spring2011/Project1/jdn-explanation.html
+ * also look into https://squarewidget.com/2019/02/
+ * @param {Date} date
+ * @param {import { DateType } from "./constants";} dateType
+ * @returns {number} jdn (Julian Day Number)
+ */
+function getJDN(
+  date: Date = new Date(),
   dateType: DateType = DateType.GREG,
 ): number {
-  const [gYear, gMonth, gDay] = [
-    greg.getFullYear(),
-    greg.getMonth() + 1,
-    greg.getDate(),
+  let [gYear, gMonth] = [
+    date.getFullYear(),
+    date.getMonth() + 1,
   ];
-  let tempMonth: number, totalYears: number, offsetDays: number;
-  tempMonth = Math.floor((14 - gMonth) / 12);
-  const tempYear = gYear + 4800 - tempMonth;
-  tempMonth = gMonth + 12 * tempMonth - 3;
-  const totalDays = Math.floor((153 * tempMonth + 2) / 5);
+  const gDay = date.getDate();
+  //if month is january or february, make it 13 and 14th month of previous year
+  if (gMonth == 1 || gMonth == 2) {
+    gYear -= 1;
+    gMonth += 12;
+  }
+  let extraLeapDays: number;
+  //converting into julian calendar, just to make calculations easier
   switch (dateType) {
     case DateType.GREG:
-      totalYears =
-        Math.floor(tempYear / 4) -
-        Math.floor(tempYear / 100) +
-        Math.floor(tempYear / 400);
-      offsetDays = 32045;
+      //extraleapdays which are added every 400 years and neglected every 100 years to make 365.2425 rather than 365.25
+      extraLeapDays = 2 - Math.floor(gYear / 100) + Math.floor(Math.floor(gYear / 100) / 4);
       break;
     case DateType.JULIAN:
-      totalYears = Math.floor(tempYear / 4);
-      offsetDays = 32083;
+      extraLeapDays = 0;
   }
-  const jdn = gDay + totalDays + 365 * tempYear + totalYears - offsetDays;
+  // formula from meeus astronomical algorithms
+  const jdn =
+    365.25 * (gYear + 4716) +
+    30.6001 * (gMonth + 1) +
+    (gDay + extraLeapDays - 1524.5);
   return jdn;
 }
-export default dateToJDN;
+export default getJDN;

@@ -1,4 +1,7 @@
 enum DateType{
     GREG, JULIAN
 }
-export {DateType};
+enum MoonPhases{
+    NEWMOON,WAXCRES,FIRSTQUARTER,WAXGIB,FULLMOON,WANGIB,THIRDQUARTER,WANCRES 
+}
+export {DateType,MoonPhases};
