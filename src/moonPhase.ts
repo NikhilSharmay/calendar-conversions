@@ -53,7 +53,5 @@ function getLunarPhasesWeekly(date: Date, numberOfWeeks = 1): Array<number> {
   return phases;
 }
 
-function getMoonRiseAndSetTime(date:Date){
 
-}
 export { getLunarDay, getLunarDaysWeekly, getLunarPhase, getLunarPhasesWeekly };
